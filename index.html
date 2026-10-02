@@ -3,159 +3,142 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#fbf7f8">
+<meta name="theme-color" content="#f8e8ee">
+<title>Mi Dinero · Gaby</title>
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mi Dinero">
-<title>Mi Dinero</title>
 <style>
-:root{--bg:#fbf7f8;--card:#fff;--ink:#30282b;--muted:#8b7e82;--accent:#d9859d;--accent-soft:#f8e7ec;--line:#eee3e7;--green:#638b75;--red:#b86c73;--shadow:0 6px 24px rgba(100,60,75,.06)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Avenir Next","SF Pro Rounded","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-button,input,select{font:inherit}
-.app{max-width:720px;margin:auto;padding:26px 16px 104px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-h1{font-size:34px;line-height:1.05;margin:2px 0;font-weight:700;letter-spacing:-.8px}
-.sub{color:var(--muted);font-size:13px;letter-spacing:.3px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:22px;margin:14px 0;box-shadow:var(--shadow)}
-.balance{font-size:46px;font-weight:700;letter-spacing:-1.2px;margin:6px 0 18px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{padding:16px;border-radius:21px;background:#fcf8f9}.stat b{font-size:21px}.green{color:var(--green)}.red{color:var(--red)}
-button.icon-button{width:52px;height:52px;border:1px solid var(--line);background:#fff;border-radius:18px;color:var(--ink);display:grid;place-items:center;box-shadow:var(--shadow)}
-button.primary{width:100%;border:0;border-radius:18px;padding:15px;background:var(--accent);color:white;font-size:16px;font-weight:700;box-shadow:0 6px 15px rgba(217,133,157,.22)}
-button.secondary{border:1px solid var(--line);background:#fff;border-radius:15px;padding:10px 13px;color:var(--ink)}
-input,select{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);font-size:16px;outline:none}input:focus,select:focus{border-color:#e4a9b8;box-shadow:0 0 0 3px var(--accent-soft)}
-label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
-.item{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
-.pill{font-size:12px;padding:6px 10px;border-radius:99px;background:var(--accent-soft);color:#a75e76;font-weight:600}
-.hidden{display:none}.empty{color:var(--muted);text-align:center;padding:28px 10px}
-h2{font-size:21px;margin:4px 0 14px;letter-spacing:-.2px}.small{font-size:12px;color:var(--muted)}
-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);border-top:1px solid var(--line);backdrop-filter:blur(18px);display:flex;justify-content:center;z-index:5;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
-nav button{background:none;border:0;padding:7px 8px 4px;color:#9a8d92;font-size:11px;min-width:64px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:500}
-nav button.active{color:var(--accent);font-weight:700}
-.nav-icon{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.flower{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+:root{
+ --bg:#fbf7f8; --card:#fff; --ink:#302a2d; --muted:#81757b;
+ --pink:#d987a4; --rose:#b85f7f; --soft:#f5e3ea; --line:#eee3e7;
+ --green:#4d9270; --red:#c96d72; --gold:#b28a49; --shadow:0 12px 32px rgba(70,35,50,.08);
+}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#fff 0,#fbf7f8 35%,#f8f1f4 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:1050px;margin:auto;padding:18px 18px 90px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 2px 20px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:50px;height:50px;border-radius:18px;background:var(--soft);display:grid;place-items:center;font-size:27px;box-shadow:var(--shadow)}
+h1{font-size:22px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:3px}
+button{border:0;border-radius:14px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--pink);color:#fff}
+button.secondary{background:#fff;color:var(--rose);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.hero{grid-column:span 12;background:linear-gradient(135deg,#fff,#f9eaf0);padding:24px}
+.hero h2{margin:0 0 5px;font-size:25px}.hero p{margin:0;color:var(--muted)}
+.stat{grid-column:span 3}.stat .label{color:var(--muted);font-size:12px}.stat .value{font-size:24px;font-weight:800;margin-top:8px}.positive{color:var(--green)}.negative{color:var(--red)}
+.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:span 12}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h3{margin:0;font-size:16px}
+.progress{height:10px;background:#f0e7ea;border-radius:99px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--rose));border-radius:99px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}
+.small{font-size:12px;color:var(--muted)}.pill{display:inline-block;padding:5px 9px;border-radius:99px;background:var(--soft);color:var(--rose);font-size:11px;font-weight:700}
+form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-size:14px}form .fullfield{grid-column:span 2}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.empty{color:var(--muted);text-align:center;padding:18px}.tx{display:flex;align-items:center;gap:10px}.dot{width:10px;height:10px;border-radius:50%;background:var(--pink)}.txinfo{flex:1}.amount{font-weight:800}.income .dot{background:var(--green)}.expense .dot{background:var(--red)}
+nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:7px;display:flex;gap:5px;box-shadow:0 12px 35px rgba(0,0,0,.12);z-index:10}nav button{background:transparent;color:var(--muted);padding:9px 12px}nav button.active{background:var(--soft);color:var(--rose)}
+@media(max-width:760px){.stat{grid-column:span 6}.wide,.side{grid-column:span 12}.app{padding:12px 12px 90px}.hero{padding:20px}.value{font-size:21px}}
+@media(max-width:470px){form{grid-template-columns:1fr}form .fullfield{grid-column:span 1}header{align-items:flex-start}.logo{width:44px;height:44px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div><div class="sub">MI DINERO</div><h1 id="month"></h1></div><button class="icon-button" aria-label="Configuración" onclick="show('settings')"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H5.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></button></div>
+<header>
+  <div class="brand"><div class="logo">🌷</div><div><h1>Mi Dinero, Gaby</h1><div class="sub">Tu dinero, tus metas, tu tranquilidad.</div></div></div>
+  <button class="secondary" onclick="exportData()">Exportar</button>
+</header>
 
-  <section id="home">
-    <div class="card">
-      <div class="sub">Disponible</div><div class="balance" id="balance">$0.00</div>
-      <div class="grid">
-        <div class="stat"><div class="sub">Ingresos</div><b class="green" id="income">$0</b></div>
-        <div class="stat"><div class="sub">Gastos</div><b class="red" id="expense">$0</b></div>
-      </div>
-    </div>
-    <div class="card"><h2>Presupuesto</h2><div id="budgets"></div></div>
-    <div class="card"><h2>Movimientos recientes</h2><div id="recent"></div></div>
-  </section>
+<main class="grid">
+<section class="card hero">
+  <h2>Hola, Gaby 💗</h2>
+  <p id="monthText">Tu resumen financiero de este mes.</p>
+</section>
 
-  <section id="transactions" class="hidden">
-    <div class="card"><h2>Nuevo movimiento</h2>
-      <label>Tipo</label><select id="type"><option value="expense">Gasto</option><option value="income">Ingreso</option></select>
-      <label>Descripción</label><input id="desc" placeholder="Ej. Gasolina">
-      <label>Monto</label><input id="amount" type="number" step="0.01" placeholder="0.00">
-      <label>Categoría</label><select id="cat"></select>
-      <label>Fecha</label><input id="date" type="date">
-      <br><br><button class="primary" onclick="addTx()">Guardar movimiento</button>
-    </div>
-    <div class="card"><h2>Todos los movimientos</h2><div id="alltx"></div></div>
-  </section>
+<div class="card stat"><div class="label">Ingresos</div><div class="value positive" id="income">$0</div></div>
+<div class="card stat"><div class="label">Gastos</div><div class="value negative" id="expense">$0</div></div>
+<div class="card stat"><div class="label">Disponible</div><div class="value" id="available">$0</div></div>
+<div class="card stat"><div class="label">Deuda pendiente</div><div class="value" id="debtTotal">$0</div></div>
 
-  <section id="budgetsPage" class="hidden">
-    <div class="card"><h2>Mis presupuestos</h2><div id="budgetList"></div></div>
-    <div class="card"><h2>Añadir categoría</h2>
-      <label>Nombre</label><input id="newCat" placeholder="Ej. Universidad">
-      <label>Límite mensual</label><input id="newLimit" type="number" step="0.01" placeholder="500">
-      <br><br><button class="primary" onclick="addBudget()">Añadir</button>
-    </div>
-  </section>
+<section class="card wide">
+ <div class="section-title"><h3>Movimientos recientes</h3><span class="pill" id="txCount">0 movimientos</span></div>
+ <div id="transactions"></div>
+</section>
 
-  <section id="debts" class="hidden">
-    <div class="card"><h2>Deudas</h2><div id="debtList"></div></div>
-    <div class="card"><h2>Añadir deuda</h2>
-      <label>Nombre</label><input id="debtName" placeholder="Ej. Tarjeta">
-      <label>Saldo</label><input id="debtBalance" type="number" step="0.01">
-      <label>Pago mínimo</label><input id="debtMin" type="number" step="0.01">
-      <label>Fecha de pago</label><input id="debtDue" type="date">
-      <br><br><button class="primary" onclick="addDebt()">Añadir deuda</button>
-    </div>
-  </section>
+<section class="card side">
+ <div class="section-title"><h3>Meta principal</h3><button onclick="editGoal()">Editar</button></div>
+ <div class="small" id="goalName">Fondo de emergencia</div>
+ <div style="font-size:24px;font-weight:800;margin:8px 0" id="goalAmount">$0 / $0</div>
+ <div class="progress"><div class="bar" id="goalBar" style="width:0%"></div></div>
+ <div class="small" id="goalPct" style="margin-top:7px">0%</div>
+</section>
 
-  <section id="goals" class="hidden">
-    <div class="card"><h2>Metas de ahorro</h2><div id="goalList"></div></div>
-    <div class="card"><h2>Nueva meta</h2>
-      <label>Meta</label><input id="goalName" placeholder="Ej. Fondo de emergencia">
-      <label>Objetivo</label><input id="goalTarget" type="number" step="0.01">
-      <label>Ahorrado</label><input id="goalSaved" type="number" step="0.01">
-      <br><br><button class="primary" onclick="addGoal()">Añadir meta</button>
-    </div>
-  </section>
+<section class="card wide">
+ <div class="section-title"><h3>Agregar movimiento</h3></div>
+ <form onsubmit="addTx(event)">
+   <div><label>Tipo</label><select id="type"><option value="income">Ingreso</option><option value="expense">Gasto</option></select></div>
+   <div><label>Monto</label><input id="amount" type="number" min="0" step="0.01" required placeholder="0.00"></div>
+   <div><label>Categoría</label><select id="category"><option>Trabajo</option><option>Comida</option><option>Vivienda</option><option>Transporte</option><option>Universidad</option><option>Deudas</option><option>Salud</option><option>Entretenimiento</option><option>Ahorro</option><option>Otros</option></select></div>
+   <div><label>Fecha</label><input id="date" type="date" required></div>
+   <div class="fullfield"><label>Descripción</label><input id="desc" maxlength="80" placeholder="Ej. pago de universidad"></div>
+   <div class="fullfield actions"><button>Guardar movimiento</button></div>
+ </form>
+</section>
 
-  <section id="settings" class="hidden">
-    <div class="card"><h2>Datos</h2>
-      <p class="small">Tus datos se guardan localmente en este dispositivo. Esta versión no conecta bancos.</p>
-      <button class="secondary" onclick="exportData()">Exportar copia</button>
-      <button class="secondary" onclick="resetData()">Borrar todos los datos</button>
-    </div>
-  </section>
-</div>
+<section class="card side">
+ <div class="section-title"><h3>Mis deudas</h3><button onclick="addDebt()">Añadir</button></div>
+ <div id="debts"></div>
+</section>
+
+<section class="card full">
+ <div class="section-title"><h3>Regla del mes</h3><span class="pill">Personal</span></div>
+ <div class="row"><span>Objetivo de ahorro</span><strong id="saveRule">0%</strong></div>
+ <div class="row"><span>Gastos registrados</span><strong id="expenseRule">$0</strong></div>
+ <div class="row"><span>Margen disponible</span><strong id="marginRule">$0</strong></div>
+</section>
+</main>
 
 <nav>
-<button onclick="show('home')" id="n-home"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M3.5 10.7 12 3.8l8.5 6.9"/><path d="M5.8 9.7V20h12.4V9.7"/><path d="M9.5 20v-5.5h5V20"/></svg><span>Inicio</span></button>
-<button onclick="show('transactions')" id="n-transactions"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg><span>Movimientos</span></button>
-<button onclick="show('budgetsPage')" id="n-budgetsPage"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M5 5.5h14v13H5z"/><path d="M8 9h8M8 12h6M8 15h4"/></svg><span>Presupuesto</span></button>
-<button onclick="show('debts')" id="n-debts"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2.5"/><path d="M4 10h16M8 14h3"/></svg><span>Deudas</span></button>
-<button onclick="show('goals')" id="n-goals"><svg class="flower" viewBox="0 0 24 24"><path d="M12 12c-2.2-2.8-5.4-2.7-6.5-.7-1 1.9.4 3.8 3 3.7-2 1.7-1.1 4.4 1.1 4.6 2.2.2 3.5-1.7 2.4-4.2 1.1 2.5 3.8 2.8 4.9 1 1.1-1.9-.4-3.8-3-3.7 2-1.7 1.1-4.4-1.1-4.6-2.2-.2-3.5 1.7-2.4 4.2Z"/><circle cx="12" cy="12" r="1.6"/></svg><span>Metas</span></button>
+<button class="active">Inicio</button>
+<button onclick="document.querySelector('.wide form').scrollIntoView({behavior:'smooth'})">+ Movimiento</button>
+<button onclick="editGoal()">Meta</button>
 </nav>
+</div>
 
 <script>
-const KEY='mi-dinero-v1';
+const KEY="gaby_finanzas_v3";
 let data=JSON.parse(localStorage.getItem(KEY)||'null')||{
- tx:[], budgets:[
-  {name:'Vivienda',limit:750},{name:'Comida',limit:300},{name:'Transporte',limit:250},
-  {name:'Universidad',limit:0},{name:'Deudas',limit:0},{name:'Ahorro',limit:0}
- ], debts:[], goals:[]
+ goal:{name:"Fondo de emergencia",saved:0,target:5000},
+ tx:[],
+ debts:[]
 };
-const $=id=>document.getElementById(id);
-const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n||0);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);
 function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
-function monthName(){return new Date().toLocaleDateString('es-US',{month:'long',year:'numeric'})}
-function monthTx(){let m=new Date().toISOString().slice(0,7);return data.tx.filter(x=>x.date.startsWith(m))}
 function render(){
- $('month').textContent=monthName();
- let tx=monthTx(), inc=tx.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0), exp=tx.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0);
- $('balance').textContent=money(inc-exp);$('income').textContent=money(inc);$('expense').textContent=money(exp);
- $('budgets').innerHTML=data.budgets.map(b=>{let used=tx.filter(x=>x.type==='expense'&&x.cat===b.name).reduce((a,x)=>a+x.amount,0),p=b.limit?Math.min(100,used/b.limit*100):0;return `<div class="item"><div><b>${b.name}</b><div class="small">${money(used)} de ${money(b.limit)}</div></div><span class="pill">${Math.round(p)}%</span></div>`}).join('')||'<div class="empty">Añade tu primer presupuesto.</div>';
- let rows=tx.slice().reverse().slice(0,8); $('recent').innerHTML=rows.length?rows.map(row).join(''):'<div class="empty">Todavía no hay movimientos.</div>';
- $('alltx').innerHTML=data.tx.slice().reverse().map(row).join('')||'<div class="empty">No hay movimientos.</div>';
- $('budgetList').innerHTML=data.budgets.map((b,i)=>`<div class="item"><div><b>${b.name}</b><div class="small">Límite ${money(b.limit)}</div></div><button class="secondary" onclick="removeBudget(${i})">Eliminar</button></div>`).join('');
- $('debtList').innerHTML=data.debts.length?data.debts.map((d,i)=>`<div class="item"><div><b>${d.name}</b><div class="small">Saldo ${money(d.balance)} · Mínimo ${money(d.min)}${d.due?' · '+d.due:''}</div></div><button class="secondary" onclick="removeDebt(${i})">×</button></div>`).join(''):'<div class="empty">No tienes deudas registradas.</div>';
- $('goalList').innerHTML=data.goals.length?data.goals.map((g,i)=>{let p=g.target?Math.min(100,g.saved/g.target*100):0;return `<div class="item"><div><b>${g.name}</b><div class="small">${money(g.saved)} de ${money(g.target)} · ${Math.round(p)}%</div></div><button class="secondary" onclick="removeGoal(${i})">×</button></div>`}).join(''):'<div class="empty">Crea una meta de ahorro.</div>';
- $('cat').innerHTML=data.budgets.map(b=>`<option>${b.name}</option>`).join('');
+ const now=new Date(), m=now.toISOString().slice(0,7);
+ document.getElementById('date').value ||= now.toISOString().slice(0,10);
+ const tx=data.tx.filter(x=>x.date?.slice(0,7)===m);
+ const income=tx.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
+ const expense=tx.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+ const debt=data.debts.reduce((s,d)=>s+d.balance,0);
+ document.getElementById('income').textContent=money(income);
+ document.getElementById('expense').textContent=money(expense);
+ document.getElementById('available').textContent=money(income-expense);
+ document.getElementById('debtTotal').textContent=money(debt);
+ document.getElementById('monthText').textContent=now.toLocaleDateString('es-ES',{month:'long',year:'numeric'}).replace(/^./,c=>c.toUpperCase());
+ document.getElementById('txCount').textContent=`${data.tx.length} movimiento${data.tx.length===1?'':'s'}`;
+ const sorted=[...data.tx].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+ document.getElementById('transactions').innerHTML=sorted.length?sorted.map(x=>`<div class="row ${x.type}"><div class="tx"><span class="dot"></span><div class="txinfo"><strong>${esc(x.desc||x.category)}</strong><div class="small">${esc(x.category)} · ${x.date}</div></div></div><div class="amount">${x.type==='income'?'+':'-'}${money(x.amount)}</div></div>`).join(''):'<div class="empty">Todavía no tienes movimientos.</div>';
+ document.getElementById('goalName').textContent=data.goal.name;
+ document.getElementById('goalAmount').textContent=`${money(data.goal.saved)} / ${money(data.goal.target)}`;
+ const pct=Math.min(100,(data.goal.saved/Math.max(1,data.goal.target))*100);
+ document.getElementById('goalBar').style.width=pct+'%';document.getElementById('goalPct').textContent=Math.round(pct)+'% completado';
+ document.getElementById('debts').innerHTML=data.debts.length?data.debts.map((d,i)=>`<div class="row"><div><strong>${esc(d.name)}</strong><div class="small">${money(d.balance)} pendientes</div></div><button class="secondary" onclick="payDebt(${i})">Pagar</button></div>`).join(''):'<div class="empty">No has añadido deudas.</div>';
+ document.getElementById('saveRule').textContent=income?Math.max(0,Math.round(((income-expense)/income)*100))+'%':'0%';
+ document.getElementById('expenseRule').textContent=money(expense);
+ document.getElementById('marginRule').textContent=money(income-expense);
 }
-function row(x){return `<div class="item"><div><b>${x.desc}</b><div class="small">${x.cat} · ${x.date}</div></div><b class="${x.type==='income'?'green':'red'}">${x.type==='income'?'+':'-'}${money(x.amount)}</b></div>`}
-function addTx(){let amount=Number($('amount').value);if(!amount||!$('desc').value)return alert('Completa descripción y monto.');data.tx.push({type:$('type').value,desc:$('desc').value,amount,cat:$('cat').value,date:$('date').value||new Date().toISOString().slice(0,10)});$('desc').value='';$('amount').value='';save()}
-function addBudget(){let n=$('newCat').value,l=Number($('newLimit').value)||0;if(!n)return;data.budgets.push({name:n,limit:l});$('newCat').value='';$('newLimit').value='';save()}
-function removeBudget(i){if(confirm('¿Eliminar esta categoría?')){data.budgets.splice(i,1);save()}}
-function addDebt(){let n=$('debtName').value;if(!n)return;data.debts.push({name:n,balance:Number($('debtBalance').value)||0,min:Number($('debtMin').value)||0,due:$('debtDue').value});$('debtName').value='';$('debtBalance').value='';$('debtMin').value='';save()}
-function removeDebt(i){data.debts.splice(i,1);save()}
-function addGoal(){let n=$('goalName').value;if(!n)return;data.goals.push({name:n,target:Number($('goalTarget').value)||0,saved:Number($('goalSaved').value)||0});$('goalName').value='';$('goalTarget').value='';$('goalSaved').value='';save()}
-function removeGoal(i){data.goals.splice(i,1);save()}
-function show(id){['home','transactions','budgetsPage','debts','goals','settings'].forEach(x=>$(x).classList.toggle('hidden',x!==id));document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));let n=$('n-'+id);if(n)n.classList.add('active')}
-function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-dinero-backup.json';a.click()}
-function resetData(){if(confirm('Esto borrará todos tus datos. ¿Continuar?')){localStorage.removeItem(KEY);location.reload()}}
-$('date').value=new Date().toISOString().slice(0,10);show('home');render();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
-}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function addTx(e){e.preventDefault();data.tx.push({type:document.getElementById('type').value,amount:Number(document.getElementById('amount').value),category:document.getElementById('category').value,date:document.getElementById('date').value,desc:document.getElementById('desc').value.trim()});e.target.reset();document.getElementById('date').value=new Date().toISOString().slice(0,10);save()}
+function addDebt(){const name=prompt("Nombre de la deuda:");if(!name)return;const balance=Number(prompt("Saldo pendiente:")||0);if(balance>0){data.debts.push({name,balance});save()}}
+function payDebt(i){const d=data.debts[i];const p=Number(prompt(`¿Cuánto quieres registrar como pago de ${d.name}?`)||0);if(p>0){d.balance=Math.max(0,d.balance-p);if(d.balance===0&&confirm("Esta deuda quedó en $0. ¿Eliminarla de la lista?"))data.debts.splice(i,1);save()}}
+function editGoal(){const n=prompt("Nombre de tu meta:",data.goal.name);if(n!==null)data.goal.name=n||data.goal.name;const t=Number(prompt("Meta total ($):",data.goal.target)||data.goal.target);const s=Number(prompt("Ahorrado actualmente ($):",data.goal.saved)||data.goal.saved);data.goal.target=t>0?t:data.goal.target;data.goal.saved=s>=0?s:data.goal.saved;save()}
+function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-dinero-gaby-backup.json';a.click();URL.revokeObjectURL(a.href)}
+render();
 </script>
 </body>
 </html>
