@@ -1,3 +1,4 @@
-# Mi Dinero · Gaby — Categorías
-Añade una pantalla de categorías inspirada en la referencia: buscador, cuadrícula de 3 columnas, iconos, categorías financieras y botón + Nuevo.
-Reemplaza los archivos del repositorio por estos archivos. Conserva los iconos PNG para la pantalla de inicio.
+# Mi Dinero · Gaby — v2
+Incluye dashboard, movimientos, categorías con iconos, deudas, metas, exportación y nuevo logo personalizado con Gaby + flor.
+Archivos necesarios: index.html, manifest.json.
+Publicación: sube ambos archivos al repositorio de GitHub Pages y reemplaza los anteriores.

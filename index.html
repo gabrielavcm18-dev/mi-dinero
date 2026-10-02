@@ -20,23 +20,6 @@ form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}label{font-size:1
 .debticon{width:38px;height:38px;border-radius:13px;background:#fff5e5;display:grid;place-items:center;font-size:19px;flex:none}
 .category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:4px}.category{border:1px solid var(--line);background:#fff;border-radius:16px;padding:10px 5px;text-align:center;cursor:pointer}.category.selected{border-color:#d98ba6;background:#fff1f5;box-shadow:0 0 0 2px #f6dce6}.category span{display:block;font-size:22px}.category b{font-size:10px;color:var(--muted)}
 nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:7px;display:flex;gap:5px;box-shadow:0 12px 35px rgba(0,0,0,.12);z-index:10}nav button{background:transparent;color:var(--muted);padding:9px 12px}nav button.active{background:var(--soft);color:var(--rose)}
-.category-open{width:100%;background:#fff;color:var(--rose);border:1px solid var(--line);text-align:left;position:relative}
-.category-open:after{content:"›";position:absolute;right:14px;font-size:22px;top:7px;color:#c98aa1}
-.selected-category{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:7px 11px;border-radius:14px;background:#fff1f5;color:#9e5272;font-size:12px;font-weight:700}
-.category-modal{display:none;position:fixed;inset:0;background:rgba(45,30,37,.22);backdrop-filter:blur(7px);z-index:100}
-.category-modal.open{display:block}
-.category-sheet{position:absolute;inset:0;background:#fff;overflow:auto;padding:20px 16px 40px}
-.cat-head{height:52px;display:grid;grid-template-columns:52px 1fr 80px;align-items:center;text-align:center;font-size:17px;letter-spacing:1.5px}
-.cat-close,.cat-new{background:transparent!important;color:var(--ink)!important;padding:6px!important;font-size:29px;font-weight:400}
-.cat-new{font-size:15px!important;white-space:nowrap;text-align:right}
-.cat-search{height:54px;border-radius:16px;background:#f4f3f4;display:flex;align-items:center;gap:8px;padding:0 15px;margin:8px 0 24px}
-.cat-search span{font-size:28px;color:#777;line-height:1}.cat-search input{border:0;background:transparent;padding:0;font-size:17px;outline:0}
-.big-category-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px dashed #ddd;border-left:1px dashed #ddd}
-.big-cat{min-height:145px;border-right:1px dashed #ddd;border-bottom:1px dashed #ddd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#fff;cursor:pointer}
-.big-cat:hover{background:#fff8fa}.big-cat .cat-icon{font-size:43px;line-height:1;filter:saturate(.85)}
-.big-cat .cat-name{font-size:16px;color:#222;text-align:center;max-width:95%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.big-cat.selected{background:#fff0f5}
-@media(max-width:470px){.big-cat{min-height:125px}.big-cat .cat-icon{font-size:37px}.big-cat .cat-name{font-size:14px}.category-sheet{padding:14px 10px 30px}}
 @media(max-width:760px){.stat{grid-column:span 6}.wide,.side{grid-column:span 12}.category-grid{grid-template-columns:repeat(5,1fr)}.app{padding:12px 12px 95px}}
 @media(max-width:470px){form{grid-template-columns:1fr}form .fullfield{grid-column:span 1}.category-grid{grid-template-columns:repeat(5,1fr);gap:6px}.category{padding:8px 2px}.category b{font-size:9px}.logo{width:52px;height:52px}}
 </style>
@@ -62,18 +45,7 @@ nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#f
 <form onsubmit="addTx(event)">
 <div><label>Tipo</label><select id="type"><option value="income">Ingreso</option><option value="expense">Gasto</option></select></div>
 <div><label>Monto</label><input id="amount" type="number" min="0" step="0.01" required placeholder="0.00"></div>
-<div class="fullfield"><label>Categoría</label>
-<button type="button" class="category-open" onclick="openCategories()">Elegir categoría</button>
-<div class="selected-category" id="selectedCategory"></div>
-<input id="category" type="hidden" value="Trabajo"></div>
-
-<div class="category-modal" id="categoryModal" aria-hidden="true">
-  <div class="category-sheet">
-    <div class="cat-head"><button type="button" class="cat-close" onclick="closeCategories()">×</button><strong>CATEGORÍA</strong><button type="button" class="cat-new" onclick="addCustomCategory()">＋ Nuevo</button></div>
-    <div class="cat-search"><span>⌕</span><input id="catSearch" placeholder="Buscar" oninput="filterCategories()"></div>
-    <div class="big-category-grid" id="bigCats"></div>
-  </div>
-</div>
+<div class="fullfield"><label>Categoría</label><div class="category-grid" id="cats"></div><input id="category" type="hidden" value="Trabajo"></div>
 <div><label>Fecha</label><input id="date" type="date" required></div>
 <div><label>Descripción</label><input id="desc" maxlength="80" placeholder="Ej. gasolina"></div>
 <div class="fullfield actions"><button>Guardar movimiento</button></div>
@@ -88,51 +60,13 @@ nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#f
 </div>
 <script>
 const KEY="gaby_finanzas_v4";
-const CATS={
-"Salario":"💶","Compra de alimentos":"🛒","Gasolina":"⛽","Alquiler":"🏠","Gimnasio":"🏋️","Restaurante":"🍴",
-"Vacaciones":"🏖️","Viajes":"🚌","Regalo":"🎁","Inversiones":"%","Ahorro":"🐷","Entretenimiento":"📱",
-"Café":"☕","Internet":"📶","Taxi":"🚕","Universidad":"🎓","Deudas":"💳","Salud":"🩷","Otros":"✨"
-};
-let customCats=JSON.parse(localStorage.getItem("gaby_custom_categories")||"[]");
+const CATS={Trabajo:"💼",Comida:"🍽️",Vivienda:"🏠",Transporte:"🚗",Universidad:"🎓",Deudas:"💳",Salud:"🩷",Entretenimiento:"🎀",Ahorro:"🌷",Otros:"✨"};
 let data=JSON.parse(localStorage.getItem(KEY)||"null")||{goal:{name:"Fondo de emergencia",saved:0,target:5000},tx:[],debts:[]};
 const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n)||0);
 function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-function renderCats(selected, filter=""){
-  const all=[...Object.keys(CATS),...customCats];
-  const q=filter.trim().toLowerCase();
-  const list=all.filter(n=>n.toLowerCase().includes(q));
-  document.getElementById("bigCats").innerHTML=list.map(name=>{
-    const icon=CATS[name]||"✨";
-    return `<div class="big-cat ${name===(selected||"Trabajo")?"selected":""}" onclick="pickCat('${name.replace(/'/g,"\\'")}')"><div class="cat-icon">${icon}</div><div class="cat-name">${esc(name)}</div></div>`;
-  }).join("") || '<div style="grid-column:1/-1;padding:35px;text-align:center;color:#888">No encontramos esa categoría.</div>';
-}
-function openCategories(){
-  document.getElementById("categoryModal").classList.add("open");
-  document.getElementById("categoryModal").setAttribute("aria-hidden","false");
-  document.getElementById("catSearch").value="";
-  pickCat(document.getElementById("category").value||"Trabajo");
-}
-function closeCategories(){
-  document.getElementById("categoryModal").classList.remove("open");
-  document.getElementById("categoryModal").setAttribute("aria-hidden","true");
-}
-function filterCategories(){renderCats(document.getElementById("category").value,document.getElementById("catSearch").value)}
-function addCustomCategory(){
-  const name=prompt("Nombre de la nueva categoría:");
-  if(!name)return;
-  const clean=name.trim();
-  if(!clean)return;
-  if(!customCats.includes(clean) && !CATS[clean]){customCats.push(clean);localStorage.setItem("gaby_custom_categories",JSON.stringify(customCats))}
-  pickCat(clean);
-}
-function pickCat(n){
-  document.getElementById("category").value=n;
-  document.getElementById("selectedCategory").innerHTML=`${CATS[n]||"✨"} ${esc(n)}`;
-  renderCats(n,document.getElementById("catSearch")?.value||"");
-  closeCategories();
-}
-(n){document.getElementById("category").value=n;renderCats(n)}
+function renderCats(selected){document.getElementById("cats").innerHTML=Object.entries(CATS).map(([name,icon])=>`<div class="category ${name===(selected||"Trabajo")?"selected":""}" onclick="pickCat('${name}')"><span>${icon}</span><b>${name}</b></div>`).join("")}
+function pickCat(n){document.getElementById("category").value=n;renderCats(n)}
 function render(){
 const now=new Date(),m=now.toISOString().slice(0,7),tx=data.tx.filter(x=>x.date?.slice(0,7)===m),income=tx.filter(x=>x.type==="income").reduce((s,x)=>s+x.amount,0),expense=tx.filter(x=>x.type==="expense").reduce((s,x)=>s+x.amount,0),debt=data.debts.reduce((s,d)=>s+d.balance,0);
 document.getElementById("income").textContent=money(income);document.getElementById("expense").textContent=money(expense);document.getElementById("available").textContent=money(income-expense);document.getElementById("debtTotal").textContent=money(debt);
@@ -143,13 +77,13 @@ document.getElementById("transactions").innerHTML=sorted.length?sorted.map(x=>`<
 document.getElementById("goalName").textContent=data.goal.name;document.getElementById("goalAmount").textContent=`${money(data.goal.saved)} / ${money(data.goal.target)}`;let pct=Math.min(100,data.goal.saved/Math.max(1,data.goal.target)*100);document.getElementById("goalBar").style.width=pct+"%";document.getElementById("goalPct").textContent=Math.round(pct)+"% completado";
 document.getElementById("debts").innerHTML=data.debts.length?data.debts.map((d,i)=>`<div class="row"><div class="tx"><div class="debticon">💳</div><div><strong>${esc(d.name)}</strong><div class="small">${money(d.balance)} pendientes</div></div></div><button class="secondary" onclick="payDebt(${i})">Pagar</button></div>`).join(""):'<div class="empty">No has añadido deudas.</div>';
 document.getElementById("saveRule").textContent=income?Math.max(0,Math.round((income-expense)/income*100))+"%":"0%";document.getElementById("expenseRule").textContent=money(expense);document.getElementById("marginRule").textContent=money(income-expense);
-pickCat(document.getElementById("category").value||"Trabajo");
+renderCats(document.getElementById("category").value||"Trabajo");
 }
-function addTx(e){e.preventDefault();data.tx.push({type:document.getElementById("type").value,amount:Number(document.getElementById("amount").value),category:document.getElementById("category").value,date:document.getElementById("date").value,desc:document.getElementById("desc").value.trim()});e.target.reset();document.getElementById("category").value="Salario";pickCat("Salario");document.getElementById("date").value=new Date().toISOString().slice(0,10);save()}
+function addTx(e){e.preventDefault();data.tx.push({type:document.getElementById("type").value,amount:Number(document.getElementById("amount").value),category:document.getElementById("category").value,date:document.getElementById("date").value,desc:document.getElementById("desc").value.trim()});e.target.reset();document.getElementById("category").value="Trabajo";document.getElementById("date").value=new Date().toISOString().slice(0,10);save()}
 function addDebt(){let name=prompt("Nombre de la deuda:");if(!name)return;let balance=Number(prompt("Saldo pendiente:")||0);if(balance>0){data.debts.push({name,balance});save()}}
 function payDebt(i){let d=data.debts[i],p=Number(prompt(`¿Cuánto quieres registrar como pago de ${d.name}?`)||0);if(p>0){d.balance=Math.max(0,d.balance-p);if(d.balance===0&&confirm("La deuda quedó en $0. ¿Eliminarla de la lista?"))data.debts.splice(i,1);save()}}
 function editGoal(){let n=prompt("Nombre de tu meta:",data.goal.name);if(n!==null)data.goal.name=n||data.goal.name;let t=Number(prompt("Meta total ($):",data.goal.target)||data.goal.target),s=Number(prompt("Ahorrado actualmente ($):",data.goal.saved)||data.goal.saved);data.goal.target=t>0?t:data.goal.target;data.goal.saved=s>=0?s:data.goal.saved;save()}
 function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mi-dinero-gaby-backup.json";a.click();URL.revokeObjectURL(a.href)}
-document.getElementById("date").value=new Date().toISOString().slice(0,10);pickCat("Salario");render();
+document.getElementById("date").value=new Date().toISOString().slice(0,10);render();
 </script>
 </body></html>
