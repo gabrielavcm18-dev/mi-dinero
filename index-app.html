@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7dfe8">
+<title>Mi Dinero · Gaby</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#fcf8fa;--card:#fff;--ink:#332b30;--muted:#897b83;--pink:#d77f9d;--rose:#b85f7f;--soft:#f8e5ed;--line:#eee1e6;--green:#4d9270;--red:#c86e78;--gold:#bd914c;--shadow:0 14px 34px rgba(74,40,56,.08)}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fff,#fcf7f9 45%,#f8eff3);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1080px;margin:auto;padding:16px 16px 100px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 2px 20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:58px;height:58px;border-radius:21px;background:linear-gradient(145deg,#fff,#f6dce6);border:1px solid #edd2dc;display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden}.logo .g{font-family:Georgia,serif;font-size:28px;font-weight:700;color:#a95375;z-index:2}.logo .flower{position:absolute;font-size:19px;right:7px;top:4px;transform:rotate(-10deg)}.logo .spark{position:absolute;font-size:10px;left:8px;bottom:7px;color:#c7839d}h1{font-family:Georgia,serif;font-size:23px;margin:0}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+button{border:0;border-radius:14px;padding:11px 15px;font-weight:750;cursor:pointer;background:var(--pink);color:#fff}button.secondary{background:#fff;color:var(--rose);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}.hero{grid-column:span 12;background:linear-gradient(135deg,#fff,#fae7ee);padding:24px}.hero h2{margin:0 0 5px;font-family:Georgia,serif;font-size:27px}.hero p{margin:0;color:var(--muted)}
+.stat{grid-column:span 3}.label{color:var(--muted);font-size:12px}.value{font-size:24px;font-weight:850;margin-top:8px}.positive{color:var(--green)}.negative{color:var(--red)}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:span 12}.section-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.section-title h3{margin:0;font-size:16px}.pill{padding:5px 9px;border-radius:99px;background:var(--soft);color:var(--rose);font-size:11px;font-weight:750}
+form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-size:14px}form .fullfield{grid-column:span 2}.actions{display:flex;gap:8px;margin-top:3px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.small{font-size:12px;color:var(--muted)}.empty{color:var(--muted);text-align:center;padding:18px}
+.tx{display:flex;align-items:center;gap:10px}.txinfo{flex:1}.amount{font-weight:800}.caticon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:#fbf0f4;font-size:21px;flex:none}.income .caticon{background:#edf7f1}.expense .caticon{background:#fff0f1}
+.progress{height:10px;background:#f0e7ea;border-radius:99px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--rose));border-radius:99px}
+.debticon{width:38px;height:38px;border-radius:13px;background:#fff5e5;display:grid;place-items:center;font-size:19px;flex:none}
+.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:4px}.category{border:1px solid var(--line);background:#fff;border-radius:16px;padding:10px 5px;text-align:center;cursor:pointer}.category.selected{border-color:#d98ba6;background:#fff1f5;box-shadow:0 0 0 2px #f6dce6}.category span{display:block;font-size:22px}.category b{font-size:10px;color:var(--muted)}
+nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:7px;display:flex;gap:5px;box-shadow:0 12px 35px rgba(0,0,0,.12);z-index:10}nav button{background:transparent;color:var(--muted);padding:9px 12px}nav button.active{background:var(--soft);color:var(--rose)}
+@media(max-width:760px){.stat{grid-column:span 6}.wide,.side{grid-column:span 12}.category-grid{grid-template-columns:repeat(5,1fr)}.app{padding:12px 12px 95px}}
+@media(max-width:470px){form{grid-template-columns:1fr}form .fullfield{grid-column:span 1}.category-grid{grid-template-columns:repeat(5,1fr);gap:6px}.category{padding:8px 2px}.category b{font-size:9px}.logo{width:52px;height:52px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="brand"><div class="logo"><span class="g">G</span><span class="flower">🌸</span><span class="spark">✦</span></div><div><h1>Mi Dinero, Gaby</h1><div class="sub">Organiza tu dinero con intención ✨</div></div></div>
+<button class="secondary" onclick="exportData()">Exportar</button>
+</header>
+<main class="grid">
+<section class="card hero"><h2>Hola, Gaby 💗</h2><p id="monthText">Tu resumen financiero.</p></section>
+<div class="card stat"><div class="label">Ingresos</div><div class="value positive" id="income">$0</div></div>
+<div class="card stat"><div class="label">Gastos</div><div class="value negative" id="expense">$0</div></div>
+<div class="card stat"><div class="label">Disponible</div><div class="value" id="available">$0</div></div>
+<div class="card stat"><div class="label">Deuda pendiente</div><div class="value" id="debtTotal">$0</div></div>
+
+<section class="card wide"><div class="section-title"><h3>Movimientos recientes</h3><span class="pill" id="txCount">0</span></div><div id="transactions"></div></section>
+<section class="card side"><div class="section-title"><h3>Meta principal</h3><button onclick="editGoal()">Editar</button></div><div class="small" id="goalName">Fondo de emergencia</div><div style="font-size:24px;font-weight:800;margin:8px 0" id="goalAmount">$0 / $0</div><div class="progress"><div class="bar" id="goalBar" style="width:0%"></div></div><div class="small" id="goalPct" style="margin-top:7px">0%</div></section>
+
+<section class="card wide">
+<div class="section-title"><h3>Agregar movimiento</h3><span class="pill">Rápido</span></div>
+<form onsubmit="addTx(event)">
+<div><label>Tipo</label><select id="type"><option value="income">Ingreso</option><option value="expense">Gasto</option></select></div>
+<div><label>Monto</label><input id="amount" type="number" min="0" step="0.01" required placeholder="0.00"></div>
+<div class="fullfield"><label>Categoría</label><div class="category-grid" id="cats"></div><input id="category" type="hidden" value="Trabajo"></div>
+<div><label>Fecha</label><input id="date" type="date" required></div>
+<div><label>Descripción</label><input id="desc" maxlength="80" placeholder="Ej. gasolina"></div>
+<div class="fullfield actions"><button>Guardar movimiento</button></div>
+</form>
+</section>
+
+<section class="card side"><div class="section-title"><h3>Mis deudas</h3><button onclick="addDebt()">Añadir</button></div><div id="debts"></div></section>
+
+<section class="card full"><div class="section-title"><h3>Tu resumen</h3><span class="pill">Este mes</span></div><div class="row"><span>Porcentaje disponible</span><strong id="saveRule">0%</strong></div><div class="row"><span>Gastos registrados</span><strong id="expenseRule">$0</strong></div><div class="row"><span>Margen disponible</span><strong id="marginRule">$0</strong></div></section>
+</main>
+<nav><button class="active">Inicio</button><button onclick="document.querySelector('form').scrollIntoView({behavior:'smooth'})">＋ Movimiento</button><button onclick="editGoal()">🎯 Meta</button></nav>
+</div>
+<script>
+const KEY="gaby_finanzas_v4";
+const CATS={Trabajo:"💼",Comida:"🍽️",Vivienda:"🏠",Transporte:"🚗",Universidad:"🎓",Deudas:"💳",Salud:"🩷",Entretenimiento:"🎀",Ahorro:"🌷",Otros:"✨"};
+let data=JSON.parse(localStorage.getItem(KEY)||"null")||{goal:{name:"Fondo de emergencia",saved:0,target:5000},tx:[],debts:[]};
+const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n)||0);
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function renderCats(selected){document.getElementById("cats").innerHTML=Object.entries(CATS).map(([name,icon])=>`<div class="category ${name===(selected||"Trabajo")?"selected":""}" onclick="pickCat('${name}')"><span>${icon}</span><b>${name}</b></div>`).join("")}
+function pickCat(n){document.getElementById("category").value=n;renderCats(n)}
+function render(){
+const now=new Date(),m=now.toISOString().slice(0,7),tx=data.tx.filter(x=>x.date?.slice(0,7)===m),income=tx.filter(x=>x.type==="income").reduce((s,x)=>s+x.amount,0),expense=tx.filter(x=>x.type==="expense").reduce((s,x)=>s+x.amount,0),debt=data.debts.reduce((s,d)=>s+d.balance,0);
+document.getElementById("income").textContent=money(income);document.getElementById("expense").textContent=money(expense);document.getElementById("available").textContent=money(income-expense);document.getElementById("debtTotal").textContent=money(debt);
+document.getElementById("monthText").textContent=now.toLocaleDateString("es-ES",{month:"long",year:"numeric"}).replace(/^./,c=>c.toUpperCase());
+document.getElementById("txCount").textContent=`${data.tx.length} movimiento${data.tx.length===1?"":"s"}`;
+const sorted=[...data.tx].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+document.getElementById("transactions").innerHTML=sorted.length?sorted.map(x=>`<div class="row ${x.type}"><div class="tx"><div class="caticon">${CATS[x.category]||"✨"}</div><div class="txinfo"><strong>${esc(x.desc||x.category)}</strong><div class="small">${esc(x.category)} · ${x.date}</div></div></div><div class="amount">${x.type==="income"?"+":"-"}${money(x.amount)}</div></div>`).join(""):'<div class="empty">Todavía no tienes movimientos.</div>';
+document.getElementById("goalName").textContent=data.goal.name;document.getElementById("goalAmount").textContent=`${money(data.goal.saved)} / ${money(data.goal.target)}`;let pct=Math.min(100,data.goal.saved/Math.max(1,data.goal.target)*100);document.getElementById("goalBar").style.width=pct+"%";document.getElementById("goalPct").textContent=Math.round(pct)+"% completado";
+document.getElementById("debts").innerHTML=data.debts.length?data.debts.map((d,i)=>`<div class="row"><div class="tx"><div class="debticon">💳</div><div><strong>${esc(d.name)}</strong><div class="small">${money(d.balance)} pendientes</div></div></div><button class="secondary" onclick="payDebt(${i})">Pagar</button></div>`).join(""):'<div class="empty">No has añadido deudas.</div>';
+document.getElementById("saveRule").textContent=income?Math.max(0,Math.round((income-expense)/income*100))+"%":"0%";document.getElementById("expenseRule").textContent=money(expense);document.getElementById("marginRule").textContent=money(income-expense);
+renderCats(document.getElementById("category").value||"Trabajo");
+}
+function addTx(e){e.preventDefault();data.tx.push({type:document.getElementById("type").value,amount:Number(document.getElementById("amount").value),category:document.getElementById("category").value,date:document.getElementById("date").value,desc:document.getElementById("desc").value.trim()});e.target.reset();document.getElementById("category").value="Trabajo";document.getElementById("date").value=new Date().toISOString().slice(0,10);save()}
+function addDebt(){let name=prompt("Nombre de la deuda:");if(!name)return;let balance=Number(prompt("Saldo pendiente:")||0);if(balance>0){data.debts.push({name,balance});save()}}
+function payDebt(i){let d=data.debts[i],p=Number(prompt(`¿Cuánto quieres registrar como pago de ${d.name}?`)||0);if(p>0){d.balance=Math.max(0,d.balance-p);if(d.balance===0&&confirm("La deuda quedó en $0. ¿Eliminarla de la lista?"))data.debts.splice(i,1);save()}}
+function editGoal(){let n=prompt("Nombre de tu meta:",data.goal.name);if(n!==null)data.goal.name=n||data.goal.name;let t=Number(prompt("Meta total ($):",data.goal.target)||data.goal.target),s=Number(prompt("Ahorrado actualmente ($):",data.goal.saved)||data.goal.saved);data.goal.target=t>0?t:data.goal.target;data.goal.saved=s>=0?s:data.goal.saved;save()}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mi-dinero-gaby-backup.json";a.click();URL.revokeObjectURL(a.href)}
+document.getElementById("date").value=new Date().toISOString().slice(0,10);render();
+</script>
+</body></html>

@@ -1,9 +1,12 @@
 {
   "name":"Mi Dinero · Gaby",
   "short_name":"Mi Dinero",
-  "start_url":".",
+  "start_url":"index-app.html",
   "display":"standalone",
-  "background_color":"#fbf7f8",
-  "theme_color":"#f8e8ee",
-  "lang":"es"
+  "background_color":"#fcf8fa",
+  "theme_color":"#f7dfe8",
+  "icons":[
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-1024.png","sizes":"1024x1024","type":"image/png","purpose":"any maskable"}
+  ]
 }
