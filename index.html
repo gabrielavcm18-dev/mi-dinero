@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f3ee">
+<meta name="theme-color" content="#fbf7f8">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,26 +11,37 @@
 <meta name="apple-mobile-web-app-title" content="Mi Dinero">
 <title>Mi Dinero</title>
 <style>
-:root{--bg:#f7f3ee;--card:#fff;--ink:#292522;--muted:#817a73;--accent:#8b6f5a;--line:#e9e1d9;--green:#537a61;--red:#a75d59}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
-.app{max-width:720px;margin:auto;padding:22px 16px 90px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-h1{font-size:30px;margin:0}.sub{color:var(--muted);font-size:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 4px 18px #00000008}
-.balance{font-size:40px;font-weight:700;margin:6px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:16px;background:#faf8f5}.stat b{font-size:20px}.green{color:var(--green)}.red{color:var(--red)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid var(--line);backdrop-filter:blur(12px);display:flex;justify-content:center;z-index:5}
-nav button{background:none;border:0;padding:12px 16px;color:var(--muted);font-size:12px}nav button.active{color:var(--ink);font-weight:700}
-button.primary{width:100%;border:0;border-radius:15px;padding:14px;background:var(--ink);color:white;font-size:16px;font-weight:700}
-button.secondary{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 13px}
-input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:16px}
-label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
-.item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
-.pill{font-size:12px;padding:5px 8px;border-radius:99px;background:#f1ece6;color:var(--muted)}
-.hidden{display:none}.empty{color:var(--muted);text-align:center;padding:25px}
-h2{font-size:20px;margin:4px 0 14px}.small{font-size:12px;color:var(--muted)}
+:root{--bg:#fbf7f8;--card:#fff;--ink:#30282b;--muted:#8b7e82;--accent:#d9859d;--accent-soft:#f8e7ec;--line:#eee3e7;--green:#638b75;--red:#b86c73;--shadow:0 6px 24px rgba(100,60,75,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Avenir Next","SF Pro Rounded","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+.app{max-width:720px;margin:auto;padding:26px 16px 104px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+h1{font-size:34px;line-height:1.05;margin:2px 0;font-weight:700;letter-spacing:-.8px}
+.sub{color:var(--muted);font-size:13px;letter-spacing:.3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:22px;margin:14px 0;box-shadow:var(--shadow)}
+.balance{font-size:46px;font-weight:700;letter-spacing:-1.2px;margin:6px 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{padding:16px;border-radius:21px;background:#fcf8f9}.stat b{font-size:21px}.green{color:var(--green)}.red{color:var(--red)}
+button.icon-button{width:52px;height:52px;border:1px solid var(--line);background:#fff;border-radius:18px;color:var(--ink);display:grid;place-items:center;box-shadow:var(--shadow)}
+button.primary{width:100%;border:0;border-radius:18px;padding:15px;background:var(--accent);color:white;font-size:16px;font-weight:700;box-shadow:0 6px 15px rgba(217,133,157,.22)}
+button.secondary{border:1px solid var(--line);background:#fff;border-radius:15px;padding:10px 13px;color:var(--ink)}
+input,select{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);font-size:16px;outline:none}input:focus,select:focus{border-color:#e4a9b8;box-shadow:0 0 0 3px var(--accent-soft)}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
+.item{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
+.pill{font-size:12px;padding:6px 10px;border-radius:99px;background:var(--accent-soft);color:#a75e76;font-weight:600}
+.hidden{display:none}.empty{color:var(--muted);text-align:center;padding:28px 10px}
+h2{font-size:21px;margin:4px 0 14px;letter-spacing:-.2px}.small{font-size:12px;color:var(--muted)}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);border-top:1px solid var(--line);backdrop-filter:blur(18px);display:flex;justify-content:center;z-index:5;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+nav button{background:none;border:0;padding:7px 8px 4px;color:#9a8d92;font-size:11px;min-width:64px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:500}
+nav button.active{color:var(--accent);font-weight:700}
+.nav-icon{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.flower{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div><div class="sub">MI DINERO</div><h1 id="month"></h1></div><button class="secondary" onclick="show('settings')">⚙️</button></div>
+  <div class="top"><div><div class="sub">MI DINERO</div><h1 id="month"></h1></div><button class="icon-button" aria-label="Configuración" onclick="show('settings')"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H5.4v-2.6h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5h2.6v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></button></div>
 
   <section id="home">
     <div class="card">
@@ -96,11 +107,11 @@ h2{font-size:20px;margin:4px 0 14px}.small{font-size:12px;color:var(--muted)}
 </div>
 
 <nav>
-<button onclick="show('home')" id="n-home">⌂<br>Inicio</button>
-<button onclick="show('transactions')" id="n-transactions">＋<br>Movimientos</button>
-<button onclick="show('budgetsPage')" id="n-budgetsPage">◫<br>Presupuesto</button>
-<button onclick="show('debts')" id="n-debts">💳<br>Deudas</button>
-<button onclick="show('goals')" id="n-goals">♡<br>Metas</button>
+<button onclick="show('home')" id="n-home"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M3.5 10.7 12 3.8l8.5 6.9"/><path d="M5.8 9.7V20h12.4V9.7"/><path d="M9.5 20v-5.5h5V20"/></svg><span>Inicio</span></button>
+<button onclick="show('transactions')" id="n-transactions"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg><span>Movimientos</span></button>
+<button onclick="show('budgetsPage')" id="n-budgetsPage"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M5 5.5h14v13H5z"/><path d="M8 9h8M8 12h6M8 15h4"/></svg><span>Presupuesto</span></button>
+<button onclick="show('debts')" id="n-debts"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2.5"/><path d="M4 10h16M8 14h3"/></svg><span>Deudas</span></button>
+<button onclick="show('goals')" id="n-goals"><svg class="flower" viewBox="0 0 24 24"><path d="M12 12c-2.2-2.8-5.4-2.7-6.5-.7-1 1.9.4 3.8 3 3.7-2 1.7-1.1 4.4 1.1 4.6 2.2.2 3.5-1.7 2.4-4.2 1.1 2.5 3.8 2.8 4.9 1 1.1-1.9-.4-3.8-3-3.7 2-1.7 1.1-4.4-1.1-4.6-2.2-.2-3.5 1.7-2.4 4.2Z"/><circle cx="12" cy="12" r="1.6"/></svg><span>Metas</span></button>
 </nav>
 
 <script>
