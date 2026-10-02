@@ -1,12 +1,13 @@
 {
   "name":"Mi Dinero · Gaby",
   "short_name":"Mi Dinero",
-  "start_url":"index-app.html",
+  "start_url":".",
   "display":"standalone",
   "background_color":"#fcf8fa",
   "theme_color":"#f7dfe8",
+  "lang":"es",
   "icons":[
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"},
-    {"src":"icon-1024.png","sizes":"1024x1024","type":"image/png","purpose":"any maskable"}
+    {"src":"apple-touch-icon.png","sizes":"180x180","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
