@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f3ee">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mi Dinero">
+<title>Mi Dinero</title>
+<style>
+:root{--bg:#f7f3ee;--card:#fff;--ink:#292522;--muted:#817a73;--accent:#8b6f5a;--line:#e9e1d9;--green:#537a61;--red:#a75d59}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
+.app{max-width:720px;margin:auto;padding:22px 16px 90px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+h1{font-size:30px;margin:0}.sub{color:var(--muted);font-size:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin:12px 0;box-shadow:0 4px 18px #00000008}
+.balance{font-size:40px;font-weight:700;margin:6px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:16px;background:#faf8f5}.stat b{font-size:20px}.green{color:var(--green)}.red{color:var(--red)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid var(--line);backdrop-filter:blur(12px);display:flex;justify-content:center;z-index:5}
+nav button{background:none;border:0;padding:12px 16px;color:var(--muted);font-size:12px}nav button.active{color:var(--ink);font-weight:700}
+button.primary{width:100%;border:0;border-radius:15px;padding:14px;background:var(--ink);color:white;font-size:16px;font-weight:700}
+button.secondary{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 13px}
+input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:16px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
+.item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
+.pill{font-size:12px;padding:5px 8px;border-radius:99px;background:#f1ece6;color:var(--muted)}
+.hidden{display:none}.empty{color:var(--muted);text-align:center;padding:25px}
+h2{font-size:20px;margin:4px 0 14px}.small{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><div><div class="sub">MI DINERO</div><h1 id="month"></h1></div><button class="secondary" onclick="show('settings')">⚙️</button></div>
+
+  <section id="home">
+    <div class="card">
+      <div class="sub">Disponible</div><div class="balance" id="balance">$0.00</div>
+      <div class="grid">
+        <div class="stat"><div class="sub">Ingresos</div><b class="green" id="income">$0</b></div>
+        <div class="stat"><div class="sub">Gastos</div><b class="red" id="expense">$0</b></div>
+      </div>
+    </div>
+    <div class="card"><h2>Presupuesto</h2><div id="budgets"></div></div>
+    <div class="card"><h2>Movimientos recientes</h2><div id="recent"></div></div>
+  </section>
+
+  <section id="transactions" class="hidden">
+    <div class="card"><h2>Nuevo movimiento</h2>
+      <label>Tipo</label><select id="type"><option value="expense">Gasto</option><option value="income">Ingreso</option></select>
+      <label>Descripción</label><input id="desc" placeholder="Ej. Gasolina">
+      <label>Monto</label><input id="amount" type="number" step="0.01" placeholder="0.00">
+      <label>Categoría</label><select id="cat"></select>
+      <label>Fecha</label><input id="date" type="date">
+      <br><br><button class="primary" onclick="addTx()">Guardar movimiento</button>
+    </div>
+    <div class="card"><h2>Todos los movimientos</h2><div id="alltx"></div></div>
+  </section>
+
+  <section id="budgetsPage" class="hidden">
+    <div class="card"><h2>Mis presupuestos</h2><div id="budgetList"></div></div>
+    <div class="card"><h2>Añadir categoría</h2>
+      <label>Nombre</label><input id="newCat" placeholder="Ej. Universidad">
+      <label>Límite mensual</label><input id="newLimit" type="number" step="0.01" placeholder="500">
+      <br><br><button class="primary" onclick="addBudget()">Añadir</button>
+    </div>
+  </section>
+
+  <section id="debts" class="hidden">
+    <div class="card"><h2>Deudas</h2><div id="debtList"></div></div>
+    <div class="card"><h2>Añadir deuda</h2>
+      <label>Nombre</label><input id="debtName" placeholder="Ej. Tarjeta">
+      <label>Saldo</label><input id="debtBalance" type="number" step="0.01">
+      <label>Pago mínimo</label><input id="debtMin" type="number" step="0.01">
+      <label>Fecha de pago</label><input id="debtDue" type="date">
+      <br><br><button class="primary" onclick="addDebt()">Añadir deuda</button>
+    </div>
+  </section>
+
+  <section id="goals" class="hidden">
+    <div class="card"><h2>Metas de ahorro</h2><div id="goalList"></div></div>
+    <div class="card"><h2>Nueva meta</h2>
+      <label>Meta</label><input id="goalName" placeholder="Ej. Fondo de emergencia">
+      <label>Objetivo</label><input id="goalTarget" type="number" step="0.01">
+      <label>Ahorrado</label><input id="goalSaved" type="number" step="0.01">
+      <br><br><button class="primary" onclick="addGoal()">Añadir meta</button>
+    </div>
+  </section>
+
+  <section id="settings" class="hidden">
+    <div class="card"><h2>Datos</h2>
+      <p class="small">Tus datos se guardan localmente en este dispositivo. Esta versión no conecta bancos.</p>
+      <button class="secondary" onclick="exportData()">Exportar copia</button>
+      <button class="secondary" onclick="resetData()">Borrar todos los datos</button>
+    </div>
+  </section>
+</div>
+
+<nav>
+<button onclick="show('home')" id="n-home">⌂<br>Inicio</button>
+<button onclick="show('transactions')" id="n-transactions">＋<br>Movimientos</button>
+<button onclick="show('budgetsPage')" id="n-budgetsPage">◫<br>Presupuesto</button>
+<button onclick="show('debts')" id="n-debts">💳<br>Deudas</button>
+<button onclick="show('goals')" id="n-goals">♡<br>Metas</button>
+</nav>
+
+<script>
+const KEY='mi-dinero-v1';
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ tx:[], budgets:[
+  {name:'Vivienda',limit:750},{name:'Comida',limit:300},{name:'Transporte',limit:250},
+  {name:'Universidad',limit:0},{name:'Deudas',limit:0},{name:'Ahorro',limit:0}
+ ], debts:[], goals:[]
+};
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n||0);
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function monthName(){return new Date().toLocaleDateString('es-US',{month:'long',year:'numeric'})}
+function monthTx(){let m=new Date().toISOString().slice(0,7);return data.tx.filter(x=>x.date.startsWith(m))}
+function render(){
+ $('month').textContent=monthName();
+ let tx=monthTx(), inc=tx.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0), exp=tx.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0);
+ $('balance').textContent=money(inc-exp);$('income').textContent=money(inc);$('expense').textContent=money(exp);
+ $('budgets').innerHTML=data.budgets.map(b=>{let used=tx.filter(x=>x.type==='expense'&&x.cat===b.name).reduce((a,x)=>a+x.amount,0),p=b.limit?Math.min(100,used/b.limit*100):0;return `<div class="item"><div><b>${b.name}</b><div class="small">${money(used)} de ${money(b.limit)}</div></div><span class="pill">${Math.round(p)}%</span></div>`}).join('')||'<div class="empty">Añade tu primer presupuesto.</div>';
+ let rows=tx.slice().reverse().slice(0,8); $('recent').innerHTML=rows.length?rows.map(row).join(''):'<div class="empty">Todavía no hay movimientos.</div>';
+ $('alltx').innerHTML=data.tx.slice().reverse().map(row).join('')||'<div class="empty">No hay movimientos.</div>';
+ $('budgetList').innerHTML=data.budgets.map((b,i)=>`<div class="item"><div><b>${b.name}</b><div class="small">Límite ${money(b.limit)}</div></div><button class="secondary" onclick="removeBudget(${i})">Eliminar</button></div>`).join('');
+ $('debtList').innerHTML=data.debts.length?data.debts.map((d,i)=>`<div class="item"><div><b>${d.name}</b><div class="small">Saldo ${money(d.balance)} · Mínimo ${money(d.min)}${d.due?' · '+d.due:''}</div></div><button class="secondary" onclick="removeDebt(${i})">×</button></div>`).join(''):'<div class="empty">No tienes deudas registradas.</div>';
+ $('goalList').innerHTML=data.goals.length?data.goals.map((g,i)=>{let p=g.target?Math.min(100,g.saved/g.target*100):0;return `<div class="item"><div><b>${g.name}</b><div class="small">${money(g.saved)} de ${money(g.target)} · ${Math.round(p)}%</div></div><button class="secondary" onclick="removeGoal(${i})">×</button></div>`}).join(''):'<div class="empty">Crea una meta de ahorro.</div>';
+ $('cat').innerHTML=data.budgets.map(b=>`<option>${b.name}</option>`).join('');
+}
+function row(x){return `<div class="item"><div><b>${x.desc}</b><div class="small">${x.cat} · ${x.date}</div></div><b class="${x.type==='income'?'green':'red'}">${x.type==='income'?'+':'-'}${money(x.amount)}</b></div>`}
+function addTx(){let amount=Number($('amount').value);if(!amount||!$('desc').value)return alert('Completa descripción y monto.');data.tx.push({type:$('type').value,desc:$('desc').value,amount,cat:$('cat').value,date:$('date').value||new Date().toISOString().slice(0,10)});$('desc').value='';$('amount').value='';save()}
+function addBudget(){let n=$('newCat').value,l=Number($('newLimit').value)||0;if(!n)return;data.budgets.push({name:n,limit:l});$('newCat').value='';$('newLimit').value='';save()}
+function removeBudget(i){if(confirm('¿Eliminar esta categoría?')){data.budgets.splice(i,1);save()}}
+function addDebt(){let n=$('debtName').value;if(!n)return;data.debts.push({name:n,balance:Number($('debtBalance').value)||0,min:Number($('debtMin').value)||0,due:$('debtDue').value});$('debtName').value='';$('debtBalance').value='';$('debtMin').value='';save()}
+function removeDebt(i){data.debts.splice(i,1);save()}
+function addGoal(){let n=$('goalName').value;if(!n)return;data.goals.push({name:n,target:Number($('goalTarget').value)||0,saved:Number($('goalSaved').value)||0});$('goalName').value='';$('goalTarget').value='';$('goalSaved').value='';save()}
+function removeGoal(i){data.goals.splice(i,1);save()}
+function show(id){['home','transactions','budgetsPage','debts','goals','settings'].forEach(x=>$(x).classList.toggle('hidden',x!==id));document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));let n=$('n-'+id);if(n)n.classList.add('active')}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-dinero-backup.json';a.click()}
+function resetData(){if(confirm('Esto borrará todos tus datos. ¿Continuar?')){localStorage.removeItem(KEY);location.reload()}}
+$('date').value=new Date().toISOString().slice(0,10);show('home');render();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+}
+</script>
+</body>
+</html>
